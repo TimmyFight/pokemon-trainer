@@ -7,8 +7,8 @@ const RegistrationForm = () => {
   const methods = useForm({
     defaultValues: {
       trainerName: "",
-      trainerAge: null,
-      pokemonName: "",
+      trainerAge: 0,
+      pokemonName: { name: "", id: 0 },
     },
   });
 
@@ -31,7 +31,10 @@ const RegistrationForm = () => {
               sx={{
                 justifyContent: "flex-end",
               }}>
-              <Button onClick={() => reset()} variant="contained">
+              <Button
+                onClick={() => reset()}
+                variant="contained"
+                color="secondary">
                 RESET
               </Button>
               <Button type="submit" variant="contained">

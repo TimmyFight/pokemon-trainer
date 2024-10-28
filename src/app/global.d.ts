@@ -1,5 +1,5 @@
 interface TrainerDetails {
   trainerName: string;
   trainerAge: number | null;
-  pokemonName: string;
+  pokemonName: { name: string; id: number };
 }
