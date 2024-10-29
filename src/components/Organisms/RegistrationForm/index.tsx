@@ -1,10 +1,13 @@
 import { Button, Paper, Stack } from "@mui/material";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import LocalTime from "@/components/Atoms/LocalTime";
+import SuccessDialog from "@/components/Atoms/SuccessDialog";
 import TrainerForm from "@/components/Molecules/TrainerForm";
 
 const RegistrationForm = () => {
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
   const initialFormValues = {
     trainerName: "",
     trainerAge: 0,
@@ -18,7 +21,12 @@ const RegistrationForm = () => {
   const { handleSubmit, reset } = methods;
 
   const handleSave = (data: TrainerDetails) => {
-    console.log(data);
+    setOpenSuccessDialog(true);
+  };
+
+  const handleClose = () => {
+    reset(initialFormValues);
+    setOpenSuccessDialog(false);
   };
 
   return (
@@ -45,6 +53,10 @@ const RegistrationForm = () => {
               </Button>
             </Stack>
           </Stack>
+          <SuccessDialog
+            openSuccessDialog={openSuccessDialog}
+            handleClose={handleClose}
+          />
         </form>
       </FormProvider>
     </Paper>

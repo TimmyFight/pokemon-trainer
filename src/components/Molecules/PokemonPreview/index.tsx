@@ -1,26 +1,64 @@
-import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
+import { Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
-const PokemonPreview = () => {
+import { fetchPokemonDetails } from "@/app/api/actions";
+import PokemonTypes from "@/components/Atoms/PokemonTypes";
+
+interface Properties {
+  pokemonId: number;
+}
+
+const PokemonPreview = ({ pokemonId }: Properties) => {
+  const [choosenPokemon, setChoosenPokemon] = useState<
+    PokemonDetails | undefined
+  >();
+
+  const fetchPokemonDetailsHandler = async () => {
+    try {
+      const data = await fetchPokemonDetails({ pokemonId });
+
+      if (typeof data === "object" && "error" in data) {
+        throw new Error(data.error);
+      } else {
+        setChoosenPokemon(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPokemonDetailsHandler();
+  }, [pokemonId]);
+
+  if (!choosenPokemon) return null;
+
   return (
-    <Box
+    <Stack
+      spacing={4}
+      direction="row"
       sx={{
-        height: 300,
-        borderWidth: 1,
-        borderStyle: "solid",
-        borderColor: "#e4e4e4",
-        borderRadius: 1,
+        alignItems: "center",
       }}>
-      <Stack
-        spacing={2}
-        sx={{
-          height: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}>
-        <Typography>Your pokemon</Typography>
+      <Stack>
+        <Image
+          width={100}
+          height={100}
+          alt={"Pokemon image"}
+          title={"Pokemon image"}
+          src={choosenPokemon.sprites.front_default}
+        />
       </Stack>
-    </Box>
+      <Stack>
+        <Typography>Name: {choosenPokemon.name}</Typography>
+        <PokemonTypes pokemonTypes={choosenPokemon.types} />
+        <Typography>
+          Base experience: {choosenPokemon?.base_experience}
+        </Typography>
+        <Typography>Id: {choosenPokemon.id}</Typography>
+      </Stack>
+    </Stack>
   );
 };
 

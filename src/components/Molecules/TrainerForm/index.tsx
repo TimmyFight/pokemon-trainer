@@ -1,4 +1,4 @@
-import { Stack, TextField } from "@mui/material";
+import { Box, Stack, TextField, Typography } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 
 import ErrorMessage from "@/components/Atoms/ErrorMessage";
@@ -9,7 +9,10 @@ const TrainerForm = () => {
   const {
     formState: { errors },
     control,
+    watch,
   } = useFormContext();
+
+  const pokemonWatcher = watch("pokemon");
 
   return (
     <>
@@ -67,7 +70,28 @@ const TrainerForm = () => {
         </Stack>
       </Stack>
       <FuzzyAutocomplete />
-      <PokemonPreview />
+      <Box
+        sx={{
+          height: 300,
+          borderWidth: 1,
+          borderStyle: "solid",
+          borderColor: "#e4e4e4",
+          borderRadius: 1,
+        }}>
+        <Stack
+          spacing={2}
+          sx={{
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+          {pokemonWatcher?.id ? (
+            <PokemonPreview pokemonId={pokemonWatcher.id} />
+          ) : (
+            <Typography>Your pokemon</Typography>
+          )}
+        </Stack>
+      </Box>
     </>
   );
 };

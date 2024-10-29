@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchLocalTime } from "@/app/api/actions";
 
 const LocalTime = () => {
-  const [localTime, setlocalTime] = useState("");
+  const [localTime, setLocalTime] = useState("");
   const fetchLocalTimeHandler = async () => {
     try {
       const data = await fetchLocalTime();
@@ -13,7 +13,7 @@ const LocalTime = () => {
         throw new Error(data.error);
       } else {
         const localTimeString = `${data.dayOfWeek}, ${data.day}.${data.month}.${data.year}`;
-        setlocalTime(localTimeString);
+        setLocalTime(localTimeString);
       }
     } catch (error) {
       console.error(error);
