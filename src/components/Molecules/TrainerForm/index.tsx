@@ -3,6 +3,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import ErrorMessage from "@/components/Atoms/ErrorMessage";
 import FuzzyAutocomplete from "@/components/Atoms/FuzzyAutocomplete";
+import PokemonPreview from "@/components/Molecules/PokemonPreview";
 
 const TrainerForm = () => {
   const {
@@ -66,6 +67,7 @@ const TrainerForm = () => {
         </Stack>
       </Stack>
       <FuzzyAutocomplete />
+      <PokemonPreview />
     </>
   );
 };

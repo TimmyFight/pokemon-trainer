@@ -1,5 +1,15 @@
+interface Pokemon {
+  name: string;
+  id: number;
+}
+
 interface TrainerDetails {
   trainerName: string;
   trainerAge: number | null;
-  pokemonName: { name: string; id: number };
+  pokemon: Pokemon;
+}
+
+interface FuseFilterResult {
+  item: Pokemon;
+  refIndex: number;
 }

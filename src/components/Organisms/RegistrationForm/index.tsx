@@ -1,15 +1,18 @@
-import { Button, Paper, Stack, Typography } from "@mui/material";
+import { Button, Paper, Stack } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 
+import LocalTime from "@/components/Atoms/LocalTime";
 import TrainerForm from "@/components/Molecules/TrainerForm";
 
 const RegistrationForm = () => {
+  const initialFormValues = {
+    trainerName: "",
+    trainerAge: 0,
+    pokemon: { name: "", id: 0 },
+  };
+
   const methods = useForm({
-    defaultValues: {
-      trainerName: "",
-      trainerAge: 0,
-      pokemonName: { name: "", id: 0 },
-    },
+    defaultValues: initialFormValues,
   });
 
   const { handleSubmit, reset } = methods;
@@ -19,8 +22,8 @@ const RegistrationForm = () => {
   };
 
   return (
-    <Paper sx={{ padding: "20px" }}>
-      <Typography>RegistrationForm</Typography>
+    <Paper sx={{ padding: 4 }}>
+      <LocalTime />
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(handleSave)}>
           <Stack spacing={4}>
@@ -32,7 +35,7 @@ const RegistrationForm = () => {
                 justifyContent: "flex-end",
               }}>
               <Button
-                onClick={() => reset()}
+                onClick={() => reset(initialFormValues)}
                 variant="contained"
                 color="secondary">
                 RESET
