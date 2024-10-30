@@ -21,7 +21,8 @@ const TrainerForm = () => {
         direction="row"
         sx={{
           justifyContent: "flex-end",
-        }}>
+        }}
+        data-testid="trainerForm">
         <Stack spacing={1}>
           <label htmlFor="trainerName">Trainer`s name</label>
           <Controller
@@ -38,6 +39,7 @@ const TrainerForm = () => {
                 type="text"
                 name="trainerName"
                 placeholder="Trainer`s name"
+                data-testid="trainerName"
               />
             )}
           />
@@ -61,6 +63,7 @@ const TrainerForm = () => {
                 type="number"
                 name="trainerAge"
                 placeholder="Trainer`s age"
+                data-testid="trainerAge"
               />
             )}
           />

@@ -48,7 +48,10 @@ const RegistrationForm = () => {
                 color="secondary">
                 RESET
               </Button>
-              <Button type="submit" variant="contained">
+              <Button
+                type="submit"
+                variant="contained"
+                data-testid="submitRegistrationForm">
                 SUBMIT
               </Button>
             </Stack>

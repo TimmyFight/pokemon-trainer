@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { fetchPokemonDetails } from "@/app/api/actions";
+import ErrorMessage from "@/components/Atoms/ErrorMessage";
 import PokemonTypes from "@/components/Atoms/PokemonTypes";
 
 interface Properties {
@@ -32,7 +33,7 @@ const PokemonPreview = ({ pokemonId }: Properties) => {
     fetchPokemonDetailsHandler();
   }, [pokemonId]);
 
-  if (!choosenPokemon) return null;
+  if (!choosenPokemon) return <ErrorMessage message="Fetch error" />;
 
   return (
     <Stack
@@ -40,7 +41,8 @@ const PokemonPreview = ({ pokemonId }: Properties) => {
       direction="row"
       sx={{
         alignItems: "center",
-      }}>
+      }}
+      data-testid="pokemonPreview">
       <Stack>
         <Image
           width={100}

@@ -7,13 +7,23 @@ The registration form for new Pokemon Trainers.
 - Next.js
 - React.js
 - TypeScript
-- Zod
+- Jest
 - Atomic Design
 - Material UI
 
+## Node version 18.18.2
+
 ## Run application
 
-1. `yarn`
-2. `yarn dev`
+1. Install dependencies
+   `yarn`
+2. Run test environment
+   `yarn dev`
 
 ## Run unit tests
+
+`yarn test`
+
+OR with observables
+
+`yarn test:watch`

@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Autocomplete,
-  CircularProgress,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Autocomplete, Stack, TextField } from "@mui/material";
 import { debounce } from "@mui/material/utils";
 import React, { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
@@ -73,6 +68,7 @@ function FuzzyAutocomplete() {
                 {...params}
                 label="Choose a Pokemon"
                 variant="outlined"
+                data-testid="pokemon"
               />
             )}
             value={value || null}

@@ -12,7 +12,7 @@ const LocalTime = () => {
       if (typeof data === "object" && "error" in data) {
         throw new Error(data.error);
       } else {
-        const localTimeString = `${data.dayOfWeek}, ${data.day}.${data.month}.${data.year}`;
+        const localTimeString = `${data?.dayOfWeek}, ${data?.day}.${data?.month}.${data?.year}`;
         setLocalTime(localTimeString);
       }
     } catch (error) {
@@ -30,7 +30,8 @@ const LocalTime = () => {
       direction="row"
       sx={{
         justifyContent: "flex-end",
-      }}>
+      }}
+      data-testid="localTime">
       {localTime}
     </Stack>
   );
