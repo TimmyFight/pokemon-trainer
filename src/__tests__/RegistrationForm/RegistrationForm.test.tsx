@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import RegistrationForm from "@/components/Organisms/RegistrationForm/index";
+import RegistrationForm from "@/components/Molecules/RegistrationForm/index";
 
 const WrapperComponent = ({ validValues = false }) => {
   const initialFormValues = {

@@ -1,16 +1,11 @@
 import { Box, Stack, TextField, Typography } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 
-import ErrorMessage from "@/components/Atoms/ErrorMessage";
 import FuzzyAutocomplete from "@/components/Atoms/FuzzyAutocomplete";
 import PokemonPreview from "@/components/Molecules/PokemonPreview";
 
 const TrainerForm = () => {
-  const {
-    formState: { errors },
-    control,
-    watch,
-  } = useFormContext();
+  const { control, watch } = useFormContext();
 
   const pokemonWatcher = watch("pokemon");
 
@@ -29,23 +24,22 @@ const TrainerForm = () => {
             name="trainerName"
             control={control}
             rules={{
-              required: true,
-              minLength: 2,
-              maxLength: 20,
+              required: "Trainer`s name is required",
+              minLength: { value: 2, message: "Minimum length is 2" },
+              maxLength: { value: 20, message: "Maximum length is 20" },
             }}
-            render={({ field }) => (
+            render={({ field, fieldState: { error } }) => (
               <TextField
                 {...field}
                 type="text"
                 name="trainerName"
                 placeholder="Trainer`s name"
                 data-testid="trainerName"
+                error={!!error}
+                helperText={error?.message || " "}
               />
             )}
           />
-          {errors.trainerName && (
-            <ErrorMessage message="Required from 2 to 20 symbols" />
-          )}
         </Stack>
         <Stack spacing={1}>
           <label htmlFor="trainerAge">Trainer`s age</label>
@@ -53,23 +47,22 @@ const TrainerForm = () => {
             name="trainerAge"
             control={control}
             rules={{
-              required: true,
-              min: 16,
-              max: 99,
+              required: "Trainer`s age is required",
+              min: { value: 16, message: "Minimum age is 16" },
+              max: { value: 99, message: "Maximum age is 99" },
             }}
-            render={({ field }) => (
+            render={({ field, fieldState: { error } }) => (
               <TextField
                 {...field}
                 type="number"
                 name="trainerAge"
                 placeholder="Trainer`s age"
                 data-testid="trainerAge"
+                error={!!error}
+                helperText={error?.message || " "}
               />
             )}
           />
-          {errors.trainerAge && (
-            <ErrorMessage message="Required range from 16-99" />
-          )}
         </Stack>
       </Stack>
       <FuzzyAutocomplete />

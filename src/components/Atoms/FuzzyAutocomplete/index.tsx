@@ -5,18 +5,12 @@ import { debounce } from "@mui/material/utils";
 import React, { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import ErrorMessage from "@/components/Atoms/ErrorMessage";
-
 interface PokemonOption {
   name: string;
 }
 
 function FuzzyAutocomplete() {
-  const {
-    control,
-    watch,
-    formState: { errors },
-  } = useFormContext();
+  const { control, watch } = useFormContext();
   const [options, setOptions] = useState<PokemonOption[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -56,9 +50,11 @@ function FuzzyAutocomplete() {
         name="pokemon"
         control={control}
         rules={{
-          validate: (value) => value.name.trim() !== "",
+          validate: (value) =>
+            (value && value.name.trim() !== "") ||
+            "Please choose your first Pokemon",
         }}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
           <Autocomplete
             id="pokemon"
             options={options}
@@ -69,6 +65,8 @@ function FuzzyAutocomplete() {
                 label="Choose a Pokemon"
                 variant="outlined"
                 data-testid="pokemon"
+                error={!!error}
+                helperText={error?.message || " "}
               />
             )}
             value={value || null}
@@ -94,7 +92,6 @@ function FuzzyAutocomplete() {
           />
         )}
       />
-      {errors.pokemon && <ErrorMessage message="Choose something" />}
     </Stack>
   );
 }

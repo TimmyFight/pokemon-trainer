@@ -2,7 +2,6 @@ import {
   Button,
   Dialog,
   DialogActions,
-  DialogTitle,
   Stack,
   Typography,
 } from "@mui/material";

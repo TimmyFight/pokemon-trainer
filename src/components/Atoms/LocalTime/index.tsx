@@ -1,29 +1,12 @@
+"use client";
+
 import { Stack } from "@mui/material";
-import { useEffect, useState } from "react";
 
-import { fetchLocalTime } from "@/app/api/actions";
+interface Properties {
+  localTime: string;
+}
 
-const LocalTime = () => {
-  const [localTime, setLocalTime] = useState("");
-  const fetchLocalTimeHandler = async () => {
-    try {
-      const data = await fetchLocalTime();
-
-      if (typeof data === "object" && "error" in data) {
-        throw new Error(data.error);
-      } else {
-        const localTimeString = `${data?.dayOfWeek}, ${data?.day}.${data?.month}.${data?.year}`;
-        setLocalTime(localTimeString);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchLocalTimeHandler();
-  }, []);
-
+export default function LocalTime({ localTime }: Properties) {
   return (
     <Stack
       mb={4}
@@ -35,6 +18,4 @@ const LocalTime = () => {
       {localTime}
     </Stack>
   );
-};
-
-export default LocalTime;
+}
