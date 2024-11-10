@@ -33,7 +33,7 @@ const RegistrationForm = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(handleSave)}>
-        <Stack spacing={4}>
+        <Stack spacing={2}>
           <TrainerForm />
           <Stack
             spacing={4}
