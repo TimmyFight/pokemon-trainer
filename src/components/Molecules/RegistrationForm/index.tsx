@@ -44,7 +44,8 @@ const RegistrationForm = () => {
             <Button
               onClick={() => reset(initialFormValues)}
               variant="contained"
-              color="secondary">
+              color="secondary"
+              data-testid="resetRegistrationForm">
               RESET
             </Button>
             <Button
